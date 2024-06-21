@@ -1,4 +1,4 @@
-# Use Apply API
+# Apply API
 
 In the .env file, apply your API key from OpenAI to get fully functioning bot
 
