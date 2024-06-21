@@ -1,56 +1,72 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperclip, faCircleUp } from '@fortawesome/free-solid-svg-icons';
 import './Chats.css';
 
-const Chats = ({ value, setValue, message, setMessage, currentTitle, setCurrentTitle, setUniqueTitles, isTyping, setIsTyping}) => {
-
+const Chats = ({ value, setValue, currentTitle, setCurrentTitle, setUniqueTitles, isTyping, setIsTyping }) => {
   const [previousChats, setPreviousChats] = useState([]);
-  
+  const [message, setMessage] = useState(null);
 
   const getMessages = async () => {
-    // simulating typing indicator for the assistant
-    setIsTyping(true) // set typing indicator to true
+    setPreviousChats(prevChats => [
+      ...prevChats,
+      { title: currentTitle || value, role: "user", content: value }
+    ]);
+
+    setIsTyping(true);
+
     const options = {
       method: "POST",
       body: JSON.stringify({ message: value }),
       headers: { "Content-Type": "application/json" }
     };
+
     try {
       const response = await fetch('http://localhost:8000/completions', options);
       const data = await response.json();
-      setMessage(data.choices[0].message);
+      if (data.choices && data.choices.length > 0) {
+        const assistantMessage = data.choices[0].message;
+        setMessage(assistantMessage);
+      } else {
+        console.error('Invalid response structure:', data);
+      }
     } catch (error) {
       console.error(error);
     } finally {
-      setIsTyping(false); // set typing indicator to false 
+      setIsTyping(false);
     }
+
+    setValue(''); // Clear the input field
   };
 
-  useEffect(() => {
-    if (value && message) {
-      if (!currentTitle) {
-        setCurrentTitle(value);
-      }
-      setPreviousChats(prevChats => {
-        const newChats = [
-          ...prevChats,
-          { title: currentTitle || value, role: "user", content: value },
-          { title: currentTitle || value, role: message.role, content: message.content }
-        ];
-        const uniqueTitles = Array.from(new Set(newChats.map(chat => chat.title)));
-        setUniqueTitles(uniqueTitles);
-        return newChats;
-      });
+  const updateCurrentTitle = useCallback(() => {
+    if (!currentTitle && value) {
+      setCurrentTitle(value);
     }
-  }, [message]);
+  }, [value, currentTitle, setCurrentTitle]);
+
+  useEffect(() => {
+    updateCurrentTitle();
+  }, [value, updateCurrentTitle]);
+
+  useEffect(() => {
+    if (message) {
+      setPreviousChats(prevChats => [
+        ...prevChats,
+        { title: currentTitle, role: message.role, content: message.content }
+      ]);
+    }
+  }, [message, currentTitle]);
+
+  useEffect(() => {
+    const uniqueTitles = Array.from(new Set(previousChats.map(chat => chat.title)));
+    setUniqueTitles(uniqueTitles);
+  }, [previousChats, setUniqueTitles]);
 
   const currentChat = previousChats.filter(chat => chat.title === currentTitle);
 
-
   return (
     <>
-
       <section className='feed'>
         {currentChat.map((chatMessage, index) => (
           <li key={index} className={`chat-bubble ${chatMessage.role === 'user' ? 'user' : 'assistant'}`}>
@@ -59,7 +75,6 @@ const Chats = ({ value, setValue, message, setMessage, currentTitle, setCurrentT
         ))}
         {isTyping && (
           <li className='chat-bubble assistant'>
-            <img src='' alt='avatar' className='avatar'/>
             <p className='role'></p>
             <p>Assistant is typing...</p>
           </li>
@@ -87,11 +102,8 @@ const Chats = ({ value, setValue, message, setMessage, currentTitle, setCurrentT
           </p>
         </div>
       </div>
-
     </>
   );
 }
 
 export default Chats;
-
-

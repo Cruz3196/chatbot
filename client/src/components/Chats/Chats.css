@@ -93,7 +93,7 @@ input:focus::placeholder{
     color: white;
     text-align: left;
     margin-right: 60%;
-    flex-direction: row-reverse;
+
 }
 
 /* .feed li{
