@@ -1,0 +1,20 @@
+.header-container{
+    grid-column: 2;
+    grid-row: 1;
+}
+.header{
+    text-align: center;
+    margin-top: 20px;
+}
+.logo{
+    height: 50px;
+    max-width: auto;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.brand{
+    font-size: 2rem;
+    cursor: pointer;
+    color: white;
+}
+

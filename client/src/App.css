@@ -1,0 +1,45 @@
+.App{
+    min-height: 100vh;
+    /* max-height: 300px; */
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 50px 1fr;
+    transition:  grid-template-columns 0.3s ease-in-out;
+    background-color: #3c3c3c;
+}
+
+.App.sidebar-closed{
+    grid-template-columns: 0 1fr;
+}
+
+.main{
+    min-height: calc(100vh - 50px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+
+
+.main.centered {
+    transform: translateX(0); /* adjust this value as need */
+}
+
+.sidebar-container{
+    grid-column: 1;
+    grid-row: 1 / 3;
+    height: 100vh;
+    max-width: 350px;
+    min-width: 200px;
+    justify-content: space-between;
+    background-color: #444654;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-container.closed{
+    transform: translateX(-100%);
+}

@@ -1,0 +1,105 @@
+.sidebar-header{
+    display: flex;
+    align-items: center;
+    position: fixed; /*  change to fixed to keep it in place*/
+    top: 10px;
+    left: 10px;
+    z-index: 1000; /* ensure it stays on the top */
+}
+.toggleButton{
+    padding: 10px 20px;
+    border: none;
+    background-color: transparent; /* background changed to transparent*/
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.toggleIcon{
+    height: 30px;
+    width: 30px;
+    border: none;
+    background: none;
+}
+
+.chatBtn{
+    margin-left: 20px;
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+}
+
+.history{
+    padding: 10px;
+    margin: 10px;
+    height: 100%;
+    color: #fff;
+}
+
+.history li {
+    list-style-type: none;
+    padding: 15px 0;
+    cursor: pointer;
+} 
+
+/* .sidebar-container{
+    grid-column: 1;
+    grid-row: 1 / 3;
+    height: 100vh;
+    max-width: 350px;
+    min-width: 200px;
+    justify-content: space-between;
+    background-color: #202123;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-container.closed{
+    transform: translateX(-100%);
+} */
+
+.sideBar{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100vh;
+}
+
+.upperSide{
+    padding: 2.5rem;
+    border-bottom: solid 0.5px rgba(255, 255, 255, 0.5);
+    height: 70%;
+}
+
+.upperSideTop{
+    margin-top: 60px;
+}
+
+.lowerSide{
+    padding: 10px;
+    margin: 10px;
+    margin-top: auto;
+    color: #fff;
+}
+
+.listItems{
+    margin: 10px 0; /* add margin top and bottom for spacing */
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem; /* adjust font size as needed*/
+    cursor: pointer;
+}
+
+.listItems a {
+    display: flex;
+    align-items: center;
+    color: inherit; /* Inherit color from the parent element */
+    text-decoration: none; /* Remove underline from link */
+}
+
+.listitemsImg{
+    margin-right: 10px; /* add margin to the right of the icon*/
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}

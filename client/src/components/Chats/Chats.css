@@ -1,0 +1,142 @@
+.chatFooter{
+    width: 100%;
+    margin-bottom: -50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+    max-width: 620px;
+}
+
+.inp {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+input {
+    width: 100%;
+    border: none;
+    font-size: 15px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.5); /* background color for input */
+    padding: 12px 15px;
+    padding-left: 50px; /*30px;add space for the placeholder */
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0 54px 55px,
+        rgba(0, 0, 0, 0.05) 0 -12px 30px,
+        rgba(0, 0, 0, 0.05) 0 4px 6px,
+        rgba(0, 0, 0, 0.05) 0 12px 3px,
+        rgba(0, 0, 0, 0.05) 0 -3px 5px;
+    padding-right: 40px;
+    transition: color 0.3s ease, opacity 0.3s ease; /* transition for smoother effect */
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.8); /* Adjust placeholder color */
+        opacity: 0.8; /* Adjust placeholder opacity */
+    }
+}
+
+input:focus{
+    outline: none;
+}
+
+/* adjust placeholder opacity when input is focused */
+input:focus::placeholder{
+    opacity: 0.6; /* example adjustment for placeholder opacity on focus*/
+}
+/* 
+.chat-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+} */
+
+.feed{
+    flex-grow: 1;
+    height: calc(100vh - 200px); /*adjust the height to fit within the viewport  */
+    height: 20px;
+    width: 100%;
+    max-width: 100%;  /*ensure it doesn't excessed the viewport width  */ 
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #3c3c3c;
+    list-style-type: none;
+    box-sizing: border-box;
+}
+
+
+.chat-bubble{
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 50px;
+    max-width: 70%;
+    word-wrap: break-word; /* ensure long words break and don't overflow */
+    
+}
+
+.chat-bubble.user{
+    background-color: #444654;
+    color: white;
+    text-align: right;
+    margin-left: 60%;
+    flex-direction: row-reverse;
+}
+
+.chat-bubble.assistant{
+    align-self: flex-start;
+    background-color: darkslategray;
+    color: white;
+    text-align: left;
+    margin-right: 60%;
+    flex-direction: row-reverse;
+}
+
+/* .feed li{
+    display: flex;
+    background-color: #444654;
+    padding: 20px;
+    margin:20px 0;
+    border-radius: 10px;
+    color: white;
+    height: 30px;
+} */
+
+
+
+.sendBtn{
+    height: 20px;
+    cursor: pointer;
+    color: white;
+}
+.send{
+    position: absolute;
+    right: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.attachment{
+    position: absolute;
+    left: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.attachmentBtn{
+    height: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+.info{
+    font-size: 11px;
+    color:white;
+    margin-top: 10px;
+    padding: 10px;
+}
+
